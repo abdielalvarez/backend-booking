@@ -1,0 +1,30 @@
+{
+  "name": "backend-booking",
+  "version": "1.0.0",
+  "description": "Making a backend of our project",
+  "main": "index.js",
+  "scripts": {
+    "dev": "DEBUG=app:* nodemon src/index.js",
+    "start": "NODE_ENV=production node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdielalvarez/backend-booking.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abdielalvarez/backend-booking/issues"
+  },
+  "homepage": "https://github.com/abdielalvarez/backend-booking#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.3.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}

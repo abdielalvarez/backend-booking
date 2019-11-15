@@ -1,0 +1,53 @@
+const express = require('express');
+const RestaurantService = require('../services/restaurants');
+
+const restaurantsApi = (app) => {
+  const router = express.Router();
+  app.use('/api/', router);
+
+  const restaurantService = new RestaurantService();
+
+  router.get('/', (req, res) => {
+    res.send('API restaurant v2');
+  });
+
+  router.get(
+    '/restaurants', async (req, res, next) => {
+    const restaurants = await restaurantService.getRestaurants()
+    res.status(200).json(restaurants);
+  });
+
+  router.get(
+    '/restaurants/:id', async (req, res, next) => {
+    const { id } = req.params
+    const restaurant = await restaurantService.getRestaurantById(id)
+    res.status(200).json(restaurant);
+  });
+
+  router.post(
+    '/', async function (req, res, next) {
+    const { body: piece } = req;
+    const restaurant = await restaurantService.createRestaurant({ piece });
+    res.status(201).json(restaurant)
+  });
+
+  router.put(
+    '/restaurants/:id', async (req, res, next) => {
+    const { id } = req.params
+    const { body: piece } = req
+    const restaurant = await restaurantService.updateRestaurantById({ id, ...piece })
+    res.status(200).json(restaurant);
+  });
+
+  router.delete('/restaurants/:id', async (req, res, next) => {
+    const { id } = req.params
+    const restaurant = await restaurantService.deleteRestaurantById(id)
+    res.status(200).json(restaurant);
+  });
+
+  router.get('*', (req, res) => {
+    res.status(404).send('Error 404');
+  });
+}
+
+module.exports = restaurantsApi;
