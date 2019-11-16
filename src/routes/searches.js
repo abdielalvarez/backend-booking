@@ -1,5 +1,6 @@
 const express = require('express');
 const SearchService = require('../services/searches');
+const RestaurantService = require('../services/restaurants');
 
 const searchesApi = (app) => {
   const router = express.Router();
@@ -10,6 +11,7 @@ const searchesApi = (app) => {
   });
 
   const searchService = new SearchService();
+  const restaurantService = new RestaurantService();
 
   router.get(
     '/searches', async (req, res, next) => {

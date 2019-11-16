@@ -1,0 +1,12 @@
+{
+    "name": "backend-booking",
+    "version": 2,
+    "builds": [{ "src": "src/index.js", "use": "@now/node-server" }],
+    "routes": [{ "src": "/(.*)", "dest": "/src/index.js" }],
+    "env": {
+        "DB_USER": "@dbuser",
+        "DB_PASSWORD": "@dbpassword",
+        "DB_HOST": "@dbhost",
+        "DB_NAME": "@dbname"
+    }
+}
