@@ -1,9 +1,10 @@
 const MongoConnect = require('../lib/mongo');
+const Restaurant = require('../models/restaurant');
 
 class RestaurantService {
     constructor() {
         this.mongodb = new MongoConnect()
-        this.collection = 'restaurant'
+        this.collection = 'restaurants'
     }
 
     async getRestaurants() {
@@ -15,9 +16,18 @@ class RestaurantService {
         }
     }
 
-    async getRestaurantById(id) {
+    async getRestaurantById(id, typeservice) {
         try {
-            const restaurant = await this.mongodb.get(this.collection, id);
+            const restaurant = await this.mongodb.get(this.collection, id, typeservice);
+            return restaurant;
+        } catch (error) {
+            throw new Error('Fallo servicio getRestaurantById');
+        }
+    }
+
+    async getRestaurantByService(typeservice) {
+        try {
+            const restaurant = await this.mongodb.getS(this.collection, typeservice);
             return restaurant;
         } catch (error) {
             throw new Error('Fallo servicio getRestaurantById');

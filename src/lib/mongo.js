@@ -34,9 +34,20 @@ class MongoLib {
     });
   };
 
-  get(collection, id) {
+  get(collection, id, typeservice) {
     return this.connect().then(db => {
-      return db.collection(collection).findOne({ _id: ObjectId(id) })
+      // Recibo multiples parámetros ya sean nulos o no
+      let busqueda = {}
+      if(id) {busqueda["_id"] = ObjectId(id)}
+      if(date) {busqueda["reserved_date"] = {$date: date}}
+      if(typeservice) {busqueda["restau.typeservice"] = typeservice}
+        return db.collection(collection).findOne(busqueda)
+    });
+  };
+
+  getS(collection, typeservice) {
+    return this.connect().then(db => {
+        return db.collection(collection).findOne({"restau.typeservice": typeservice })
     });
   };
 

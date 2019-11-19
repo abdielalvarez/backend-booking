@@ -3,8 +3,9 @@ const app = express();
 const { config } = require('./config');
 const { port } = config
 
-const restaurantsApi = require('./routes/restaurants')
-const searchesApi = require('./routes/searches')
+const restaurantsApi = require('./routes/restaurants');
+const searchesApi = require('./routes/searches');
+const authApi = require('../src/routes/auth');
 
 // BodyParser
 app.use(express.json());
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 
 // Routes
 
+authApi(app)
 restaurantsApi(app)
 searchesApi(app)
 
