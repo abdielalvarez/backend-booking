@@ -7,6 +7,7 @@ class RestaurantService {
         this.collection = 'restaurants'
     }
 
+    // RUTA DE PRUEBA
     async getRestaurants() {
         try {
             const restaurants = await this.mongodb.getAll(this.collection, {});
@@ -37,15 +38,16 @@ class RestaurantService {
         }
     }
 
-    // async getRestaurantByService(typeservice) {
-    //     try {
-    //         const restaurant = await this.mongodb.getS(this.collection, typeservice);
-    //         return restaurant;
-    //     } catch (error) {
-    //         throw new Error('Fallo servicio getRestaurantById');
-    //     }
-    // }
+    async getRestaurantById(id) {
+        try {
+            const restaurant = await this.mongodb.getId(this.collection, id);
+            return restaurant;
+        } catch (error) {
+            throw new Error('Fallo servicio getRestaurantById');
+        }
+    }
 
+    // RUTA DE PRUEBA
     async createRestaurant(restaurant) {
         try {
             const id = await this.mongodb.create(this.collection, restaurant);
@@ -55,6 +57,7 @@ class RestaurantService {
         }
     }
     
+    // RUTA DE PRUEBA
     async updateRestaurantById({ id, ...data }) {
         try {
             const restaurantId = await this.mongodb.update(this.collection, id, data);
@@ -64,6 +67,7 @@ class RestaurantService {
         }
     }
 
+    // RUTA DE PRUEBA
     async deleteRestaurantById(id) {
         try {
             await this.mongodb.delete(this.collection, id);

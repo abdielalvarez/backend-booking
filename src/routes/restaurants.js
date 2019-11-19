@@ -14,6 +14,7 @@ const restaurantsApi = (app) => {
     res.send('API restaurant v2');
   });
 
+  // RUTA DE PRUEBA
   router.get(
     '/restaurants', async (req, res, next) => {
     const restaurants = await restaurantService.getRestaurants()
@@ -28,7 +29,7 @@ const restaurantsApi = (app) => {
   // });
 
   router.get(
-    '/restaurant/:type?/:zone?', async (req, res, next) => {
+    '/restaurantList/:type?/:zone?', async (req, res, next) => {
     const { type, zone } = req.query
     const restaurants = await restaurantService.getRestaurantsList(type, zone)
     const firstRestaurant = restaurants[0]
@@ -39,6 +40,14 @@ const restaurantsApi = (app) => {
     res.status(200).json(response);
   });
 
+  router.get(
+    '/restaurantId/:id', async (req, res, next) => {
+    const { id } = req.params
+    const restaurants = await restaurantService.getRestaurantById(id)
+    res.status(200).json(restaurants);
+  });
+
+  // RUTA DE PRUEBA
   router.post(
     '/', async function (req, res, next) {
     const { body: body } = req;
@@ -46,6 +55,7 @@ const restaurantsApi = (app) => {
     res.status(201).json(restaurant)
   });
 
+  // RUTA DE PRUEBA
   router.put(
     '/restaurant/:id', async (req, res, next) => {
     const { id } = req.params
@@ -54,6 +64,7 @@ const restaurantsApi = (app) => {
     res.status(200).json(restaurant);
   });
 
+  // RUTA DE PRUEBA
   router.delete('/restaurant/:id', async (req, res, next) => {
     const { id } = req.params
     const restaurant = await restaurantService.deleteRestaurantById(id)

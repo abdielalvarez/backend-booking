@@ -11,7 +11,6 @@ const searchesApi = (app) => {
   });
 
   const searchService = new SearchService();
-  const restaurantService = new RestaurantService();
 
   router.get(
     '/searches', async (req, res, next) => {

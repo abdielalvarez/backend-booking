@@ -25,6 +25,7 @@ class MongoLib {
     return MongoLib.connection;
   }
 
+  // RUTA DE PRUEBA
   getAll(collection, query) {
     return this.connect().then(db => {
       return db
@@ -44,22 +45,20 @@ class MongoLib {
     });
   };
 
-  // get(collection, type, zone) {
-  //     return this.connect().then(db => {
-  //       // Recibo multiples parámetros ya sean nulos o no
-  //       let busqueda = {}
-  //       if(type) {busqueda["type"] = type}
-  //       if(zone) {busqueda["id"] = zone}
-  //         return db.collection(collection).find(busqueda)
-  //     });
-  //   };
+  getId(collection, id) {
+    return this.connect().then(db => {
+        return db.collection(collection).findOne({ _id: ObjectId(id) })
+    });
+  };
 
+  // RUTA DE PRUEBA
   create(collection, data) {
     return this.connect()
       .then(db => db.collection(collection).insertOne(data))
       .then(result => result.insertedId)
   };
 
+  // RUTA DE PRUEBA
   update(collection, id, data) {
     return this.connect()
       .then(db => {
@@ -72,6 +71,7 @@ class MongoLib {
       .then(result => result.upsertedId || id);
   };
 
+  // RUTA DE PRUEBA
   delete(collection, id) {
     return this.connect()
       .then(db => {
