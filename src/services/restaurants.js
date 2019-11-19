@@ -16,23 +16,35 @@ class RestaurantService {
         }
     }
 
-    async getRestaurantById(id, typeservice) {
+    // async getRestaurants(type, zone) {
+    //     try {
+    //         const restaurants = await this.mongodb.get(this.collection, type, zone);
+    //         console.log(restaurants);
+
+            
+    //         return restaurants;
+    //     } catch (error) {
+    //         throw new Error('Fallo servicio getRestaurants')
+    //     }
+    // }
+
+    async getRestaurantById(type, zone) {
         try {
-            const restaurant = await this.mongodb.get(this.collection, id, typeservice);
+            const restaurant = await this.mongodb.get(this.collection, type, zone);
             return restaurant;
         } catch (error) {
             throw new Error('Fallo servicio getRestaurantById');
         }
     }
 
-    async getRestaurantByService(typeservice) {
-        try {
-            const restaurant = await this.mongodb.getS(this.collection, typeservice);
-            return restaurant;
-        } catch (error) {
-            throw new Error('Fallo servicio getRestaurantById');
-        }
-    }
+    // async getRestaurantByService(typeservice) {
+    //     try {
+    //         const restaurant = await this.mongodb.getS(this.collection, typeservice);
+    //         return restaurant;
+    //     } catch (error) {
+    //         throw new Error('Fallo servicio getRestaurantById');
+    //     }
+    // }
 
     async createRestaurant(restaurant) {
         try {

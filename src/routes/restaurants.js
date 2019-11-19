@@ -20,29 +20,36 @@ const restaurantsApi = (app) => {
     res.status(200).json(restaurants);
   });
 
+  // router.get(
+  //   '/restaurants/:type?/:zone?', async (req, res, next) => {
+  //   const { type, zone } = req.query
+  //   const restaurants = await restaurantService.getRestaurants(type, zone)
+  //   res.status(200).json(restaurants);
+  // });
+
   router.get(
-    '/restaurant/:id?/:typeservice?', async (req, res, next) => {
-    const { id, typeservice } = req.query
-    const restaurant = await restaurantService.getRestaurantById(id, typeservice)
+    '/restaurant/:type?/:zone?', async (req, res, next) => {
+    const { type, zone } = req.query
+    const restaurant = await restaurantService.getRestaurantById(type, zone)
     res.status(200).json(restaurant);
   });
 
   router.post(
     '/', async function (req, res, next) {
-    const { body: restau } = req;
-    const restaurant = await restaurantService.createRestaurant({ restau });
+    const { body: body } = req;
+    const restaurant = await restaurantService.createRestaurant({ body });
     res.status(201).json(restaurant)
   });
 
   router.put(
-    '/restaurants/:id', async (req, res, next) => {
+    '/restaurant/:id', async (req, res, next) => {
     const { id } = req.params
     const { body: piece } = req
     const restaurant = await restaurantService.updateRestaurantById({ id, ...piece })
     res.status(200).json(restaurant);
   });
 
-  router.delete('/restaurants/:id', async (req, res, next) => {
+  router.delete('/restaurant/:id', async (req, res, next) => {
     const { id } = req.params
     const restaurant = await restaurantService.deleteRestaurantById(id)
     res.status(200).json(restaurant);

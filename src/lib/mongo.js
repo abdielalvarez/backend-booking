@@ -34,22 +34,25 @@ class MongoLib {
     });
   };
 
-  get(collection, id, typeservice) {
+  get(collection, type, zone) {
     return this.connect().then(db => {
       // Recibo multiples parámetros ya sean nulos o no
       let busqueda = {}
-      if(id) {busqueda["_id"] = ObjectId(id)}
-      if(date) {busqueda["reserved_date"] = {$date: date}}
-      if(typeservice) {busqueda["restau.typeservice"] = typeservice}
-        return db.collection(collection).findOne(busqueda)
+      if(type) {busqueda["type"] = type}
+      if(zone) {busqueda["name"] = zone}
+        return db.collection(collection).find(busqueda).toArray()
     });
   };
 
-  getS(collection, typeservice) {
-    return this.connect().then(db => {
-        return db.collection(collection).findOne({"restau.typeservice": typeservice })
-    });
-  };
+  // get(collection, type, zone) {
+  //     return this.connect().then(db => {
+  //       // Recibo multiples parámetros ya sean nulos o no
+  //       let busqueda = {}
+  //       if(type) {busqueda["type"] = type}
+  //       if(zone) {busqueda["id"] = zone}
+  //         return db.collection(collection).find(busqueda)
+  //     });
+  //   };
 
   create(collection, data) {
     return this.connect()
