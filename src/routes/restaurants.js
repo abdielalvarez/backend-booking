@@ -30,8 +30,13 @@ const restaurantsApi = (app) => {
   router.get(
     '/restaurant/:type?/:zone?', async (req, res, next) => {
     const { type, zone } = req.query
-    const restaurant = await restaurantService.getRestaurantById(type, zone)
-    res.status(200).json(restaurant);
+    const restaurants = await restaurantService.getRestaurantsList(type, zone)
+    const firstRestaurant = restaurants[0]
+    const response = {
+      response1: restaurants,
+      response2: firstRestaurant
+    }
+    res.status(200).json(response);
   });
 
   router.post(

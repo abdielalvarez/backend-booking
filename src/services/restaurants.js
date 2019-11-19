@@ -28,9 +28,9 @@ class RestaurantService {
     //     }
     // }
 
-    async getRestaurantById(type, zone) {
+    async getRestaurantsList(type, zone) {
         try {
-            const restaurant = await this.mongodb.get(this.collection, type, zone);
+            const restaurant = await this.mongodb.getList(this.collection, type, zone);
             return restaurant;
         } catch (error) {
             throw new Error('Fallo servicio getRestaurantById');

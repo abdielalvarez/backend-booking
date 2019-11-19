@@ -34,7 +34,7 @@ class MongoLib {
     });
   };
 
-  get(collection, type, zone) {
+  getList(collection, type, zone) {
     return this.connect().then(db => {
       // Recibo multiples parámetros ya sean nulos o no
       let busqueda = {}
