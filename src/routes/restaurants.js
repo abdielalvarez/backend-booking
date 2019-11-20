@@ -21,17 +21,10 @@ const restaurantsApi = (app) => {
     res.status(200).json(restaurants);
   });
 
-  // router.get(
-  //   '/restaurants/:type?/:zone?', async (req, res, next) => {
-  //   const { type, zone } = req.query
-  //   const restaurants = await restaurantService.getRestaurants(type, zone)
-  //   res.status(200).json(restaurants);
-  // });
-
   router.get(
-    '/restaurantList/:type?/:zone?', async (req, res, next) => {
-    const { type, zone } = req.query
-    const restaurants = await restaurantService.getRestaurantsList(type, zone)
+    '/restaurantList/:category?/:zone?', async (req, res, next) => {
+    const { category, zone } = req.query
+    const restaurants = await restaurantService.getRestaurantsList(category, zone)
     const firstRestaurant = restaurants[0]
     const response = {
       response1: restaurants,
@@ -43,16 +36,24 @@ const restaurantsApi = (app) => {
   router.get(
     '/restaurantId/:id', async (req, res, next) => {
     const { id } = req.params
-    const restaurants = await restaurantService.getRestaurantById(id)
-    res.status(200).json(restaurants);
+    const restaurant = await restaurantService.getRestaurantById(id)
+    res.status(200).json(restaurant);
   });
 
   // RUTA DE PRUEBA
   router.post(
     '/', async function (req, res, next) {
-    const { body: body } = req;
-    const restaurant = await restaurantService.createRestaurant({ body });
+    const { body: piece } = req;
+    const restaurant = await restaurantService.createRestaurant({ ...piece });
     res.status(201).json(restaurant)
+  });
+
+  // RUTA DE PRUEBA
+  router.post(
+    '/many', async function (req, res, next) {
+    const { body: restaurants } = req;
+    const moreRestaurants = await restaurantService.createRestaurants({ ...restaurants });
+    res.status(201).json(moreRestaurants)
   });
 
   // RUTA DE PRUEBA

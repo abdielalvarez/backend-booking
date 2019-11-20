@@ -35,12 +35,12 @@ class MongoLib {
     });
   };
 
-  getList(collection, type, zone) {
+  getList(collection, category, zone) {
     return this.connect().then(db => {
       // Recibo multiples parámetros ya sean nulos o no
       let busqueda = {}
-      if(type) {busqueda["type"] = type}
-      if(zone) {busqueda["name"] = zone}
+      if(category) {busqueda["category"] = category}
+      if(zone) {busqueda["zone"] = zone}
         return db.collection(collection).find(busqueda).toArray()
     });
   };
@@ -51,11 +51,42 @@ class MongoLib {
     });
   };
 
-  // RUTA DE PRUEBA
-  create(collection, data) {
+  create(collection, data, restaurant) {
+    // date:
+    const instance = new Date()
+    const day = instance.getUTCDate()
+    const month = instance.getUTCMonth() + 1
+    const year = instance.getUTCFullYear()
+    const date = `${day}/${month}/${year}`
+    data["date"] = date
+
+    // hour:
+    const hour = instance.getHours()
+    const minutes = instance.getMinutes()
+    const hours = `${hour}:${minutes}`
+    data["hour"] = hours
+
+    const id = ObjectId(restaurant)
+
+    data["restaurantId"] = id
+    
     return this.connect()
       .then(db => db.collection(collection).insertOne(data))
       .then(result => result.insertedId)
+  };
+
+  // // RUTA DE PRUEBA
+  // create(collection, data) {
+  //   return this.connect()
+  //     .then(db => db.collection(collection).insertOne(data))
+  //     .then(result => result.insertedId)
+  // };
+
+  // RUTA DE PRUEBA
+  createMany(collection, data) {
+    return this.connect()
+      .then(db => db.collection(collection).insertMany(data))
+      .then(result => result)
   };
 
   // RUTA DE PRUEBA

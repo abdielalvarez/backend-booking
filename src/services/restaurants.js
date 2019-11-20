@@ -17,21 +17,9 @@ class RestaurantService {
         }
     }
 
-    // async getRestaurants(type, zone) {
-    //     try {
-    //         const restaurants = await this.mongodb.get(this.collection, type, zone);
-    //         console.log(restaurants);
-
-            
-    //         return restaurants;
-    //     } catch (error) {
-    //         throw new Error('Fallo servicio getRestaurants')
-    //     }
-    // }
-
-    async getRestaurantsList(type, zone) {
+    async getRestaurantsList(category, zone) {
         try {
-            const restaurant = await this.mongodb.getList(this.collection, type, zone);
+            const restaurant = await this.mongodb.getList(this.collection, category, zone);
             return restaurant;
         } catch (error) {
             throw new Error('Fallo servicio getRestaurantById');
@@ -54,6 +42,16 @@ class RestaurantService {
             return id;
         } catch (error) {
             throw new Error('Fallo servicio createRestaurant');
+        }
+    }
+
+    // RUTA DE PRUEBA
+    async createRestaurants(restaurants) {
+        try {
+            const moreRestaurants = await this.mongodb.createMany(this.collection, restaurants);
+            return moreRestaurants;
+        } catch (error) {
+            throw new Error('Fallo servicio createRestaurants');
         }
     }
     

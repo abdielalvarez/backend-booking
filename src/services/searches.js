@@ -24,14 +24,23 @@ class SearchService {
         }
     }
 
-    async createSearch(search) {
+    async createSearch(search, restaurant) {
         try {
-            const id = await this.mongodb.create(this.collection, search);
+            const id = await this.mongodb.create(this.collection, search, restaurant);
             return id;
         } catch (error) {
             throw new Error('Fallo servicio createSearch');
         }
     }
+
+    // async createSearch(search) {
+    //     try {
+    //         const id = await this.mongodb.create(this.collection, search);
+    //         return id;
+    //     } catch (error) {
+    //         throw new Error('Fallo servicio createSearch');
+    //     }
+    // }
     
     async updateSearchById({ id, ...data }) {
         try {

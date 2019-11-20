@@ -9,6 +9,9 @@ const authApi = require('../src/routes/auth');
 
 // BodyParser
 app.use(express.json());
+app.use(express.urlencoded({
+    extended: true
+})); 
 
 app.get('/', (req, res) => {
     const userInfo = req.header('user-agent');

@@ -11,6 +11,7 @@ const searchesApi = (app) => {
   });
 
   const searchService = new SearchService();
+  const restaurantService = new RestaurantService();
 
   router.get(
     '/searches', async (req, res, next) => {
@@ -26,16 +27,17 @@ const searchesApi = (app) => {
   });
 
   router.post(
-    '/', async function (req, res, next) {
+    '/:restaurantId', async function (req, res, next) {
+    const restaurante = req.param('restaurantId')
     const { body: piece } = req;
-    const search = await searchService.createSearch({ piece });
+    const search = await searchService.createSearch({ ...piece }, restaurante);  
     res.status(201).json(search)
   });
 
   router.put(
     '/searches/:id', async (req, res, next) => {
     const { id } = req.params
-    const { body: piece } = req
+    const { piece } = req.body
     const search = await searchService.updateSearchById({ id, ...piece })
     res.status(200).json(search);
   });
