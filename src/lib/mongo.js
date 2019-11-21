@@ -51,7 +51,7 @@ class MongoLib {
     });
   };
 
-  create(collection, data, restaurantId, restaurantName, restaurantCategory, userId, userName, bookDate, bookHour) {
+  createBooking(collection, data, restaurantId, restaurantName, restaurantCategory, userId, userName, bookDate, bookHour) {
     // date:
     const instance = new Date()
     const day = instance.getUTCDate()
@@ -114,12 +114,11 @@ class MongoLib {
       .then(result => result.insertedId)
   };
 
-  // // RUTA DE PRUEBA
-  // create(collection, data) {
-  //   return this.connect()
-  //     .then(db => db.collection(collection).insertOne(data))
-  //     .then(result => result.insertedId)
-  // };
+  create(collection, data) {
+    return this.connect()
+      .then(db => db.collection(collection).insertOne(data))
+      .then(result => result.insertedId)
+  };
 
   // RUTA DE PRUEBA
   createMany(collection, data) {

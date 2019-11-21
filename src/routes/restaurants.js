@@ -1,8 +1,6 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const passport = require('passport');
 const RestaurantService = require('../services/restaurants');
-const Restaurant = require('../models/restaurant');
-
 
 const restaurantsApi = (app) => {
   const router = express.Router();
@@ -22,7 +20,9 @@ const restaurantsApi = (app) => {
   });
 
   router.get(
-    '/restaurantList/:category?/:zone?', async (req, res, next) => {
+    '/restaurantList/:category?/:zone?',
+    passport.authenticate('basic', { session: false }),
+    async (req, res, next) => {
     const { category, zone } = req.query
     const restaurants = await restaurantService.getRestaurantsList(category, zone)
     const firstRestaurant = restaurants[0]
@@ -34,7 +34,9 @@ const restaurantsApi = (app) => {
   });
 
   router.get(
-    '/restaurantId/:id', async (req, res, next) => {
+    '/restaurantId/:id',
+    passport.authenticate('basic', { session: false }),
+    async (req, res, next) => {
     const { id } = req.params
     const restaurant = await restaurantService.getRestaurantById(id)
     res.status(200).json(restaurant);

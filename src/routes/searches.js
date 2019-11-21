@@ -1,6 +1,6 @@
 const express = require('express');
+const passport = require('passport');
 const SearchService = require('../services/searches');
-const RestaurantService = require('../services/restaurants');
 
 const searchesApi = (app) => {
   const router = express.Router();
@@ -11,7 +11,6 @@ const searchesApi = (app) => {
   });
 
   const searchService = new SearchService();
-  const restaurantService = new RestaurantService();
 
   router.get(
     '/searches', async (req, res, next) => {
@@ -27,7 +26,9 @@ const searchesApi = (app) => {
   });
 
   router.post(
-    '/:restaurantId/:restaurantName/:restaurantCategory/:userId/:userName/:bookDate/:bookHour', async function (req, res, next) {
+    '/:restaurantId/:restaurantName/:restaurantCategory/:userId/:userName/:bookDate/:bookHour',
+    passport.authenticate('basic', { session: false }),
+    async function (req, res, next) {
     const restaurantId = req.param('restaurantId')
     const restaurantName = req.param('restaurantName')
     const restaurantCategory = req.param('restaurantCategory')

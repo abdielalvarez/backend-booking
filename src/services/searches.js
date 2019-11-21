@@ -26,12 +26,21 @@ class SearchService {
 
     async createSearch(search, restaurantId, restaurantName, restaurantCategory, userId, userName, bookDate, bookHour) {
         try {
-            const id = await this.mongodb.create(this.collection, search, restaurantId, restaurantName, restaurantCategory, userId, userName, bookDate, bookHour);
+            const id = await this.mongodb.createBooking(this.collection, search, restaurantId, restaurantName, restaurantCategory, userId, userName, bookDate, bookHour);
             return id;
         } catch (error) {
             throw new Error('Fallo servicio createSearch');
         }
     }
+
+    // async createAuth(search) {
+    //     try {
+    //         const id = await this.mongodb.create(this.collection, search);
+    //         return id;
+    //     } catch (error) {
+    //         throw new Error('Fallo servicio createSearch');
+    //     }
+    // }
 
     // async createSearch(search) {
     //     try {
