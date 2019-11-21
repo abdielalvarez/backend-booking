@@ -27,10 +27,16 @@ const searchesApi = (app) => {
   });
 
   router.post(
-    '/:restaurantId', async function (req, res, next) {
-    const restaurante = req.param('restaurantId')
+    '/:restaurantId/:restaurantName/:restaurantCategory/:userId/:userName/:bookDate/:bookHour', async function (req, res, next) {
+    const restaurantId = req.param('restaurantId')
+    const restaurantName = req.param('restaurantName')
+    const restaurantCategory = req.param('restaurantCategory')
+    const userId = req.param('userId')
+    const userName = req.param('userName')
+    const bookDate = req.param('bookDate')
+    const bookHour = req.param('bookHour')
     const { body: piece } = req;
-    const search = await searchService.createSearch({ ...piece }, restaurante);  
+    const search = await searchService.createSearch({ ...piece }, restaurantId, restaurantName, restaurantCategory, userId, userName, bookDate, bookHour);  
     res.status(201).json(search)
   });
 
