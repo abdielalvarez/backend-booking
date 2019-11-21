@@ -1,7 +1,7 @@
 {
     "name": "backend-booking",
     "version": 2,
-    "builds": [{ "src": "src/index.js", "use": "@now/node-server" }],
+    "builds": [{ "src": "src/**/*index.js", "use": "@now/node-server" }],
     "routes": [{ "src": "/(.*)", "dest": "/src/index.js" }],
     "env": {
         "DB_USER": "@dbuser",
@@ -13,6 +13,8 @@
         "AUTH_JWT_SECRET": "@authjwtsecret",
         "USER_API_KEY_TOKEN": "@userapikeytoken",
         "ADMIN_API_KEY_TOKEN": "@adminapikeytoken",
-        "OWNER_API_KEY_TOKEN": "@ownerapikeytoken"
+        "OWNER_API_KEY_TOKEN": "@ownerapikeytoken",
+        "NODE_ENV": "@nodeenv",
+        "PORT": "@port"
     }
 }

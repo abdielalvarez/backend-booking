@@ -9,9 +9,6 @@ const UsersService = require('../services/users');
 // Basic strategy
 require('../utils/auth/strategies/basic');
 
-// OAuth strategy
-require('../utils/auth/strategies/oauth');
-
 function authApi(app) {
   const router = express.Router();
   app.use('/api/auth', router);
@@ -74,32 +71,6 @@ function authApi(app) {
       next(error);
     }
   });
-
-  router.get(
-    "/auth/google-oauth",
-    passport.authenticate("google-oauth", {
-      scope: ["email", "profile", "openid"]
-    })
-  );
-  
-  router.get(
-    "/auth/google-oauth/callback",
-    passport.authenticate("google-oauth", { session: false }),
-    function(req, res, next) {
-      if (!req.user) {
-        next(boom.unauthorized());
-      }
-  
-      const { token, ...user } = req.user;
-  
-      res.cookie("token", token, {
-        httpOnly: !config.dev,
-        secure: !config.dev
-      });
-  
-      res.status(200).json(user);
-    }
-  );
 };
 
 module.exports = authApi;

@@ -29,8 +29,7 @@
     "mongoose": "^5.7.11",
     "now": "^16.5.2",
     "passport": "^0.4.0",
-    "passport-http": "^0.3.0",
-    "passport-oauth": "^1.0.0"
+    "passport-http": "^0.3.0"
   },
   "devDependencies": {
     "chalk": "^3.0.0",
