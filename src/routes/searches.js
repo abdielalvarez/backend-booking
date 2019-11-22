@@ -26,7 +26,7 @@ const searchesApi = (app) => {
   });
 
   router.post(
-    '/:restaurantId/:restaurantName/:restaurantCategory/:userId/:userName/:bookDate/:bookHour',
+    '/:restaurantId/:restaurantName/:restaurantCategory/:userId/:userName/:bookDate/:bookHour/:peopleNumber',
     passport.authenticate('basic', { session: false }),
     async function (req, res, next) {
     const restaurantId = req.param('restaurantId')
@@ -36,8 +36,9 @@ const searchesApi = (app) => {
     const userName = req.param('userName')
     const bookDate = req.param('bookDate')
     const bookHour = req.param('bookHour')
+    const peopleNumber = req.param('peopleNumber')
     const { body: piece } = req;
-    const search = await searchService.createSearch({ ...piece }, restaurantId, restaurantName, restaurantCategory, userId, userName, bookDate, bookHour);  
+    const search = await searchService.createSearch({ ...piece }, restaurantId, restaurantName, restaurantCategory, userId, userName, bookDate, bookHour, peopleNumber);  
     res.status(201).json(search)
   });
 

@@ -24,9 +24,9 @@ class SearchService {
         }
     }
 
-    async createSearch(search, restaurantId, restaurantName, restaurantCategory, userId, userName, bookDate, bookHour) {
+    async createSearch(search, restaurantId, restaurantName, restaurantCategory, userId, userName, bookDate, bookHour, peopleNumber) {
         try {
-            const id = await this.mongodb.createBooking(this.collection, search, restaurantId, restaurantName, restaurantCategory, userId, userName, bookDate, bookHour);
+            const id = await this.mongodb.createBooking(this.collection, search, restaurantId, restaurantName, restaurantCategory, userId, userName, bookDate, bookHour, peopleNumber);
             return id;
         } catch (error) {
             throw new Error('Fallo servicio createSearch');

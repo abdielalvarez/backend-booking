@@ -51,13 +51,13 @@ class MongoLib {
     });
   };
 
-  createBooking(collection, data, restaurantId, restaurantName, restaurantCategory, userId, userName, bookDate, bookHour) {
+  createBooking(collection, data, restaurantId, restaurantName, restaurantCategory, userId, userName, bookDate, bookHour, peopleNumber) {
     // date:
     const instance = new Date()
     const day = instance.getUTCDate()
     const month = instance.getUTCMonth() + 1
     const year = instance.getUTCFullYear()
-    const date = `${day}-${month}-${year}`
+    const date = `${year}-${month}-${day}`
     data["creationDate"] = date
     // hour:
     const hour = instance.getHours()
