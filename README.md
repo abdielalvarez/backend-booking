@@ -1,2 +1,2 @@
 # backend-booking
-Making a backend of our project
+Backend of booking restaurants app
